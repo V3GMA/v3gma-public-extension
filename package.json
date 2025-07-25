@@ -1,0 +1,196 @@
+{
+  "name": "V3gmaa",
+  "displayName": "V3gma - AI Code Assistant",
+  "description": "Intelligent AI-powered code assistance for faster development, debugging, and refactoring across multiple programming languages.",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Snippets",
+    "Formatters",
+    "Debuggers"
+  ],
+  "keywords": [
+    "ai",
+    "code-generation",
+    "debugging",
+    "refactoring",
+    "assistant",
+    "productivity",
+    "multi-language"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "V3gma.generateCode",
+        "title": "Generate Code with AI",
+        "category": "V3gma"
+      },
+      {
+        "command": "V3gma.debugAssist",
+        "title": "Debug with AI Assistant",
+        "category": "V3gma"
+      },
+      {
+        "command": "V3gma.refactorCode",
+        "title": "Refactor Code",
+        "category": "V3gma"
+      },
+      {
+        "command": "V3gma.explainCode",
+        "title": "Explain Selected Code",
+        "category": "V3gma"
+      },
+      {
+        "command": "V3gma.openSettings",
+        "title": "Open V3gma Settings",
+        "category": "V3gma"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "V3gma.generateCode",
+          "group": "V3gma@1",
+          "when": "editorHasSelection || !editorHasSelection"
+        },
+        {
+          "command": "V3gma.debugAssist",
+          "group": "V3gma@2",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "V3gma.refactorCode",
+          "group": "V3gma@3",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "V3gma.explainCode",
+          "group": "V3gma@4",
+          "when": "editorHasSelection"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "V3gma.generateCode"
+        },
+        {
+          "command": "V3gma.debugAssist"
+        },
+        {
+          "command": "V3gma.refactorCode"
+        },
+        {
+          "command": "V3gma.explainCode"
+        },
+        {
+          "command": "V3gma.openSettings"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "V3gma.generateCode",
+        "key": "ctrl+alt+g",
+        "mac": "cmd+alt+g",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "V3gma.debugAssist",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "V3gma.refactorCode",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "V3gma",
+      "properties": {
+        "V3gma.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for AI service",
+          "scope": "application"
+        },
+        "V3gma.model": {
+          "type": "string",
+          "default": "gpt-4",
+          "enum": ["gpt-4", "gpt-3.5-turbo", "claude-3", "custom"],
+          "description": "AI model to use for code assistance"
+        },
+        "V3gma.maxTokens": {
+          "type": "number",
+          "default": 2048,
+          "description": "Maximum tokens for AI responses"
+        },
+        "V3gma.enableAutoComplete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI-powered auto-completion"
+        },
+        "V3gma.enableInlineHints": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inline AI suggestions"
+        },
+        "V3gma.supportedLanguages": {
+          "type": "array",
+          "default": ["javascript", "typescript", "python", "java", "cpp", "csharp", "go", "rust"],
+          "description": "Programming languages supported by V3gma"
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "V3gmaPanel",
+          "name": "V3gma Assistant",
+          "when": "V3gma:enabled"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "openai": "^4.0.0"
+  },
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  }
+}
